@@ -37,11 +37,7 @@ LMS/
 1. **Copy the Makefile** from the `docs/` folder to the root of your project (if not already present).
 2. **Ensure all service folders** (`services/lms`, `services/reco`) are present in the structure above.
 3. **Copy `.env-example` to `.env` in each service folder and adjust as needed.**
-4. **Build the Docker images:**
-   ```sh
-   make build
-   ```
-5. **From the root of your project, run:**
+4. **From the root of your project, run:**
    ```sh
    make up
    ```
