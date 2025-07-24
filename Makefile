@@ -10,7 +10,10 @@ up-reco:
 down-reco:
 	docker-compose -f services/reco/docker-compose.reco.yml down
 
-up:
+db-create-reco:
+	docker-compose -f services/reco/docker-compose.reco.yml run --rm reco bundle exec rails db:create
+
+up: network-create db-create-reco
 	docker-compose -f services/lms/docker-compose.lms.yml up --build & \
 	docker-compose -f services/reco/docker-compose.reco.yml up --build
 
@@ -47,3 +50,6 @@ reco-logs:
 
 reco-ssh:
 	docker-compose -f services/reco/docker-compose.reco.yml exec reco bash 
+
+network-create:
+	docker network create lmsnet || true 
