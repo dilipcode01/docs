@@ -1,0 +1,42 @@
+### Create a course
+
+POST http://localhost:3001/courses
+Authorization: Bearer {{jwt}}
+Content-Type: application/json
+
+{
+  "title": "Ruby 101",
+  "description": "Intro to Ruby"
+}
+
+### Create a lesson
+
+POST http://localhost:3001/lessons
+Authorization: Bearer {{jwt}}
+Content-Type: application/json
+
+{
+  "course_id": "{{course_id}}",
+  "title": "Lesson 1",
+  "content": "Basics"
+}
+
+### Mark lesson as complete
+
+POST http://localhost:3001/lessons/{{lesson_id}}/complete
+Authorization: Bearer {{jwt}}
+Content-Type: application/json
+
+{
+  "user_id": "user-1"
+}
+
+### Get user stats
+
+GET http://localhost:3001/users/user-1/stats
+Authorization: Bearer {{jwt}}
+
+### Get course recommendations
+
+GET http://localhost:3002/users/user-1/next-course
+Authorization: Bearer {{jwt}} 
