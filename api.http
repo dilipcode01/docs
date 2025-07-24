@@ -1,3 +1,19 @@
+### Login (Get JWT Token)
+
+POST http://localhost:3001/login
+Content-Type: application/json
+
+{
+  "name": "alice"
+}
+
+# Response:
+# {
+#   "token": "...",
+#   "user_id": "...",
+#   "name": "alice"
+# }
+
 ### Create a course
 
 POST http://localhost:3001/courses
@@ -8,6 +24,37 @@ Content-Type: application/json
   "title": "Ruby 101",
   "description": "Intro to Ruby"
 }
+
+### List all courses (with pagination and filtering)
+
+GET http://localhost:3001/courses?page=1&per_page=10&title=Ruby
+Authorization: Bearer {{jwt}}
+
+### Get a course by ID
+
+GET http://localhost:3001/courses/{{course_id}}
+Authorization: Bearer {{jwt}}
+
+### Update a course
+
+PUT http://localhost:3001/courses/{{course_id}}
+Authorization: Bearer {{jwt}}
+Content-Type: application/json
+
+{
+  "title": "Ruby 101 - Updated",
+  "description": "Updated description"
+}
+
+### Delete a course
+
+DELETE http://localhost:3001/courses/{{course_id}}
+Authorization: Bearer {{jwt}}
+
+### List lessons for a course
+
+GET http://localhost:3001/courses/{{course_id}}/lessons
+Authorization: Bearer {{jwt}}
 
 ### Create a lesson
 
@@ -21,22 +68,49 @@ Content-Type: application/json
   "content": "Basics"
 }
 
+### List all lessons
+
+GET http://localhost:3001/lessons
+Authorization: Bearer {{jwt}}
+
+### Get a lesson by ID
+
+GET http://localhost:3001/lessons/{{lesson_id}}
+Authorization: Bearer {{jwt}}
+
+### Update a lesson
+
+PUT http://localhost:3001/lessons/{{lesson_id}}
+Authorization: Bearer {{jwt}}
+Content-Type: application/json
+
+{
+  "title": "Lesson 1 - Updated",
+  "content": "Updated content"
+}
+
+### Delete a lesson
+
+DELETE http://localhost:3001/lessons/{{lesson_id}}
+Authorization: Bearer {{jwt}}
+
 ### Mark lesson as complete
 
 POST http://localhost:3001/lessons/{{lesson_id}}/complete
 Authorization: Bearer {{jwt}}
 Content-Type: application/json
 
-{
-  "user_id": "user-1"
-}
+# No body needed; user_id is taken from JWT
 
 ### Get user stats
 
-GET http://localhost:3001/users/user-1/stats
+GET http://localhost:3001/users/{{user_id}}/stats
 Authorization: Bearer {{jwt}}
 
-### Get course recommendations
+### Get course recommendations (Reco Service)
 
-GET http://localhost:3002/users/user-1/next-course
-Authorization: Bearer {{jwt}} 
+GET http://localhost:3002/users/{{user_id}}/next-course
+Authorization: Bearer {{jwt}}
+
+### Health check (Reco Service)
+GET http://localhost:3002/up 
