@@ -3,7 +3,7 @@
 ## Overview
 
 - **LMS Service**: CRUD for courses/lessons, mark lesson complete, user stats, JWT authentication.
-- **Recommendation Service**: Consumes learner history events, recommends next course.
+- **Recommendation Service**: Consumes recommends next course.
 - **Database**: Each service uses its own Postgres instance (UUID PKs).
 - **API**: JSON REST APIs for all endpoints.
 
@@ -32,6 +32,11 @@ LMS/
 - For **Docker Compose**: use `.env` in each service folder with `POSTGRES_HOST=postgres`.
 - For **local development** (connecting to local Postgres): use `.env.local` in each service folder with `POSTGRES_HOST=localhost`.
 - Example `.env` and `.env.local` files are provided as `.env-example` in each service folder.
+
+> ⚠️ **Note on Sequent version compatibility**  
+> While setting up Sequent with Ruby ≥ 3.2, Rails ≥ 7.1, and Sequent ≥ 5.0, version compatibility issues have been encountered.  
+> Multiple combinations of gem versions were tried, but problems persisted. Even with Sequent version 8.0 installed, other issues arose.  
+> It’s unclear whether these issues stem from version mismatches or possibly due to a local machine configuration issue.
 
 ### Steps
 1. **Copy the Makefile** from the `docs/` folder to the root of your project (if not already present).
